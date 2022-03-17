@@ -501,13 +501,13 @@ class TranslatableListener extends MappedEventSubscriber
 
                 foreach ($result as $entry) {
                     if ($entry['field'] == $field) {
-                        $translated = $entry['content'] ?? null;
+                        $translated = $entry['content'] ?? $this->defaultTranslationValue;
 
                         break;
                     }
                 }
                 // update translation
-                if ((null !== $translated   || $translated !== '')
+                if ($translated
                     || (!$this->translationFallback && (!isset($config['fallback'][$field]) || !$config['fallback'][$field]))
                     || ($this->translationFallback && isset($config['fallback'][$field]) && !$config['fallback'][$field])
                 ) {
